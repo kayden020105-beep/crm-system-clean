@@ -251,8 +251,10 @@ def serve_frontend(path):
 
 # ── Entry ─────────────────────────────────────────────────────────────────────
 
+# Move init_db() here so Gunicorn triggers it upon importing the app!
+init_db()
+
 if __name__ == "__main__":
-    init_db()
     port = int(os.environ.get("PORT", 5000))
     print(f"🚀 CRM server running on http://localhost:{port}")
     app.run(host="0.0.0.0", port=port, debug=False)
